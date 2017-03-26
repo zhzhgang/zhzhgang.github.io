@@ -15,7 +15,7 @@ comment:
 
 # Social
 social:
-    weibo: 5366874726 
+    weibo: 2321674383 
     github: zhzhgang
     # twitter: 
     mail: zhang_zhonggang@163.com
@@ -36,7 +36,8 @@ blog_button:
 
 # Navigation buttons in the front page.s
 nav:
-    - {title: 所有文章, description: archive, url: '/archive'}   
+    - {title: 所有文章, description: archive, url: '/archive'}
+    - {title: 分类, description: categories, url: '/categories'}   
     - {title: 标签, description: tags, url: '/tags'}      
     - {title: 关于我, description: about, url: '/about'}      
     
