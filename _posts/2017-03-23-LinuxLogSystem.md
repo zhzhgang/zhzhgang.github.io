@@ -44,7 +44,12 @@ Linux大部分发行版都内置使用 **syslog** 系统日志。
 * Linux提供的日志服务程序。
 
 rsyslog 代替 syslog 成为 Ubuntu、Fedora等的默认日志收集工具。
+
 rsyslog 主要是由 Input、Output、Parser 这样三个模块构成的。
 
 rsyslog 还有一个核心的功能模块是Queue，正是因为它才能做到如此高并发。
 
+
+## 转储的日志
+
+logrotate 程序是一个日志文件管理工具。用来把旧的日志文件删除，并创建新的日志文件。可以根据日志文件的大小，或者其天数来切割日志。这个过程又叫做“转储”。
