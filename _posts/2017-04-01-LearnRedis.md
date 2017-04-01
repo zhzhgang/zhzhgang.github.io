@@ -71,11 +71,10 @@ Redis 提供了丰富的数据结构：lists, sets, ordered sets, hashes, string
 
 ### 查看Redis
 
-> ps -ef | grep redis
+	ps -ef | grep redis
 
-> 通过启动命令检查Redis服务器状态
-> 
-> $ netstat -nlt | grep 6379
+	通过启动命令检查Redis服务器状态
+	$ netstat -nlt | grep 6379
 
 ### 启动 Redis-client
 
