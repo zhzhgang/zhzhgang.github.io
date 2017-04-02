@@ -272,3 +272,53 @@ info [section]：查询Redis相关信息。info 命令可以查询 Redis 几乎�
 11. default: 返回常规设置信息
 
 若命令参数为空，info命令返回所有信息。
+
+
+# <span id=4>Redis 的高级应用</span>
+
+## 安全性
+
+设置密码的两种方式：
+
+* 使用 config set 命令的 requirepass 参数，具体格式为：config set requirepass “password”
+* 配置 redis.conf 中设置 requirepass 属性，后面为密码
+
+输入认证的方式也有两种：
+
+* 登录时可以 redis-cli -a password
+* 登录后使用 auth password
+
+## 主从复制
+
+通过主从复制可以允许多个 slave server 拥有和 master server 相同的数据库副本。
+
+从服务器只能读，不能写。
+
+Redis 主从复制的特点：
+
+* master 可以拥有多个 slave
+* 多个 slave 可以连接同一个 master 外，还可以连接到其他的 slave。（当 master 宕机后，相连的 slave 转变为 master）
+* 主从复制不会阻塞 master，再同步数据时，master 可以继续处理 client 请求
+* 提高了系统的可伸缩性
+
+
+Redis主从复制的过程：
+
+
+1. Slave 与 master 建立连接，发送 sync 同步命令
+2. Master 会启动一个后台进程，将数据库快照保存到文件中，同时 Master 主进程会开始收集新的写命令并缓存
+3. 后台完成保存后，就将此文件发送给 Slave
+4. Slave 将此文件保存到磁盘上
+
+## 事务处理
+
+Redis 的事务处理比较简单。只能保证 client 发起的事务中的命令可以连续的执行，而且不会插入其他的 client 命令。
+
+当一个 client 在连接中发出 **multi** 命令时，这个连接就进入一个事务的上下文，该连接后续的命令不会执行，而是存放到一个队列中，当执行 exec 命令时，redis 会顺序的执行队列中的所有命令。
+
+如果其中执行出现错误，执行正确的不会回滚，不同于关系型数据库的事务。
+
+## 持久化机制
+
+Redis 是一个支持持久化的内存数据库，Redis 需要经常将内存中的数据同步到磁盘来保证持久化。
+
