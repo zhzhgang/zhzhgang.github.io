@@ -7,7 +7,12 @@ categories: [数据库]
 tags: [数据库, Redis]
 ---
 
-# Redis 简介与安装
+* [Redis 简介与安装](#1)
+* [Redis数据类型](#2)
+* [Redis系统管理](#3)
+* [Redis的高级应用](#4)
+
+# <span id="1">Redis 简介与安装</span>
 
 
 ## Redis 简介
@@ -84,7 +89,7 @@ Redis 提供了丰富的数据结构：lists, sets, ordered sets, hashes, string
 -------------
 
 
-# Redis 数据类型
+# <span id="2">Redis 数据类型</span>
 
 Redis 不仅仅是简单的 key-value 存储器，同时也是一种数据结构服务器（data structures server）。
 
@@ -164,3 +169,106 @@ zadd 与 sadd 类似，但是在元素之前多了一个参数，这个参数便
 > zrange sortedset 0 -1 withscores
 
 
+----
+
+# <span id="3">Redis 系统管理</span>
+
+## 适合全体类型的常用命令
+
+启动 redis 服务和 redis-cli：
+
+sudo service redis-server start
+
+redis-cli
+
+### exists and del
+
+exists key 判断一个 key 是否存在，存在返回 1，否则返回 0。
+
+del key 删除某个 key，或是一系列 key。del key1 key2 key3，成功返回 1，失败返回 0（key 值不存在）。
+
+### type and keys
+
+type key：返回某个 key 元素的数据类型（none: 不存在，string：字符，list, set, zset, hash）。key 不存在返回空。
+
+keys key-pattern：返回匹配的 key 列表（keys foo*：查找 foo 开头的 key）
+
+### randomkey and clear
+
+randomkey：随机获得一个已存在的 key。如果当前数据库为空，则返回空字符串
+
+clear: 清除界面
+
+### rename and renamenx
+
+rename oldname newname：改key的名字，新键如果存在将被覆盖
+
+renamenx oldname newname：更改key的名字，如果名字存在则更改失败
+
+### dbsize
+
+dbsize：返回当前数据库的key的总数
+
+## Redis 时间相关命令
+
+### 限定 key 生存时间
+
+这也是一个无视数据类型的命令，对于临时存储很有用处。避免进行大量的DEL操作。
+
+expire：设置某个key的过期时间（秒），(expire bruce 1000：设置bruce这个key 1000秒后系统自动删除)。
+
+注意：如果在还没有过期的时候，对值进行了改变，那么那个值会被清除。
+
+### 查询 key 剩余生存时间
+
+ttl：查找某个 key 还有多长时间过期，返回时间秒
+
+### 清除 key
+
+flushdb：清空当前数据库中的所有键
+
+flushall：清空所有数据库中的所有键
+
+## Redis 设置相关命令
+
+Redis有其配置文件，可以通过 client-command 窗口查看或者更改相关配置
+
+### config get 和 config set 
+
+ config get：用来读取运行Redis服务器的配置参数。
+
+config set：用于更改运行Redis服务器的配置参数。
+
+auth：认证密码
+
+> config get requirepass （查看密码）
+
+> config set requirepass 123 （设置密码为123 ）
+
+> config get requirepass  （报错，没有认证）
+
+> auth test123
+
+> config get requirepass
+
+### 重置报告
+
+config resetstat：重置数据统计报告，通常返回值为 OK。
+
+## 查询信息
+
+info [section]：查询Redis相关信息。info 命令可以查询 Redis 几乎所有的信息，其命令选项有如下：
+
+1. server: Redis server的常规信息
+2. clients: Client的连接选项
+3. memory: 存储占用相关信息
+4. persistence: RDB and AOF 相关信息
+5. stats: 常规统计
+6. replication: Master/slave请求信息
+7. cpu: CPU 占用信息统计
+8. cluster: Redis 集群信息
+9. keyspace: 数据库信息统计
+10. all: 返回所有信息
+11. default: 返回常规设置信息
+
+若命令参数为空，info命令返回所有信息。
