@@ -79,3 +79,88 @@ Redis 提供了丰富的数据结构：lists, sets, ordered sets, hashes, string
 ### 启动 Redis-client
 
 > redis-cli
+
+
+-------------
+
+
+# Redis 数据类型
+
+Redis 不仅仅是简单的 key-value 存储器，同时也是一种数据结构服务器（data structures server）。
+
+传统的 key-value 是指使用一个 key 字符串来索引 value 字符串的存储。而在 Redis 中，value 不仅仅支持字符串，还支持更多的复杂结构，包括列表、集合、哈希表等。
+
+## Redis Strings 
+
+字符串是最基本的 Redis 值类型。
+
+Redis 字符串是二进制安全的，意味着一个 Redis 字符串能包含任意类型的数据。一个字符串类型的值最多能存储 512M 字节的内容。
+
+用 set 和 get 命令来创建和检索 strings。
+
+## Redis Lists
+
+Redis 列表是简单的字符串列表，按照插入顺序排列。
+
+lpush 命令插入一个新的元素到头部（左边），rpush 插入一个新元素到尾部（右边）。
+
+push 一类的命令的返回值是 list 长度。
+
+这些命令都是可变的命令，即可以一次将多个元素放入 list。
+
+pop 命令取出 list 中的元素，和 push 类似，pop 可以选择从不同的方向取出元素。
+
+pop 命令返回值为取出的元素。
+
+## Redis Hashes
+
+Redis Hashes 是字符串字段和字符串值之间的映射，因此是展现对象的完美数据类型。
+
+hmset 命令设置一个多域的 hash 表。
+
+hget 命令获取指定的单域。
+
+hgetall 命令获取指定 key 的所有信息。
+
+hmget 类似于 hget，只是返回一个value数组。
+
+同样可以根据需要对 hash 表的表项进行单独的操作，例如 hincrby
+
+## Redis 无序集合
+
+Redis 集合（Set）是一个无序的字符串集合。
+
+可以以 O(1) 的时间复杂度，完成添加、删除、测试元素是否存在。
+
+sadd 命令产生一个无序集合，返回集合的元素个数。
+
+smembers 命令用于查看集合。
+
+sismember 用于查看集合是否存在，匹配项包括集合名和元素个数。匹配成功返回 1，失败返回 0。
+
+## Redis 有序集合
+
+有序集合的每一个成员都关联了一个评分，这个评分被用来按照从最低分到最高分的方式排列集合中的成员。
+
+集合中的成员是唯一的，但是评分可以是重复的。
+
+使用有序集合，可以以 O(logN) 的时间复杂度，添加，删除，和更新元素。
+
+zadd 与 sadd 类似，但是在元素之前多了一个参数，这个参数便是用于排序的，形成一个有序的集合。
+> zadd sortedset 2 abc
+> 
+> zadd sortedset 5 ccc
+
+> 查看正序的集合：
+> 
+> zrange sortedset 0 -1
+> 
+> 查看反序的集合：
+> 
+> zrevrange sortedset 0 -1 
+
+> 使用 withscores 参数返回记录值：
+> 
+> zrange sortedset 0 -1 withscores
+
+
