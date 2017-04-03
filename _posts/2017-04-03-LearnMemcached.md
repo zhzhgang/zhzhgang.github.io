@@ -69,3 +69,58 @@ Memcached 是一套高性能的、分布式内存对象缓存系统。它不是�
 ## 相关链接
 * [Memcached 官网](http://memcached.org/ "Memcached 官网")
 * [Memcached 源码](https://github.com/memcached/memcached)
+
+# <span id="2">Memcached 的安装与配置</span>
+
+## 安装
+
+### Linux 下安装
+
+安装方式有两种：
+
+* 包管理工具安装
+* 源码安装
+
+#### 包管理工具安装
+
+> sudo apt-get install memcached
+
+Memcached 的卸载
+
+> sudo apt-get --purge remove memcached
+
+#### 源码安装
+
+查看 libevent 是否已经安装。它是 Memcached 的依赖包， 必须在 Memcached 之前装好。
+
+> dpkg -l | grep libevent
+
+安装 libevent：
+
+> wget http://labfile.oss.aliyuncs.com/libevent-2.0.21-stable.tar.gz
+> 
+> cd libevent-2.0.21-stable
+> 
+> ./configure --prefix=/usr && make test && sudo make install
+
+安装 Memcached：
+
+> wget http://labfile.oss.aliyuncs.com/memcached-1.4.22.tar.gz
+
+> ./configure --with-libevent=/usr && make test && sudo make install
+
+### Windows 下的安装
+
+
+### Mac 下的安装
+
+## 配置
+
+启动 Memcached：
+
+> memcached -d -m 256 -u root -l localhost -p 11210 -c 256 -P /tmp/memcached.pid
+
+查看帮助文档： 
+
+> memcached -h
+
