@@ -8,9 +8,9 @@ tags: [数据库, Redis]
 ---
 
 * [Redis 简介与安装](#1)
-* [Redis数据类型](#2)
-* [Redis系统管理](#3)
-* [Redis的高级应用](#4)
+* [Redis 数据类型](#2)
+* [Redis 系统管理](#3)
+* [Redis 的高级应用](#4)
 
 # <span id="1">Redis 简介与安装</span>
 
