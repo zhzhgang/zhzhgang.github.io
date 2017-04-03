@@ -91,9 +91,9 @@ Memcached 的卸载
 
 #### 源码安装
 
-查看 libevent 是否已经安装。它是 Memcached 的依赖包， 必须在 Memcached 之前装好。
+查看 libevent 是否已经安装。它是 Memcached 的依赖包， 必须在 Memcached 之前装好:
 
-> dpkg -l | grep libevent
+dpkg -l | grep libevent
 
 安装 libevent：
 
@@ -123,4 +123,33 @@ Memcached 的卸载
 查看帮助文档： 
 
 > memcached -h
+
+
+# <span id="3">Memcached 特性实战</span>
+
+## Memcached 的内存存储
+
+slab allocator 缓存内存碎片化。
+
+Memcached 采用的是 slab allocator 缓存碎片化的机制来管理内存。
+
+page: 分配给 Slab 的内存空间，默认是 1 MB。分配给 Slab 之后根据 slab 的大小切分成 chunk。
+
+Chunk: 用于缓存记录的内存空间。
+
+Slab class: 特定大小的 chunk 的组。
+
+也就是说，slab allocator 预先按照规定的大小，将内存分割为多个特定长度的块以解决内存存储的问题。
+
+memcached 保存了 slab 空闲 chunk 表，当需要内存的时候，通过判断内存大小，选择合适的 Chunk 进行存储，将数据缓存起来。
+
+memcached 虽然减少了碎片化，但是却会造成内存浪费。
+
+可以通过调整 grow factor 来调节 slab class 的大小，memcached 在启动时可以指定特定的 grow factor（-f），其默认值是 1.25，指定的大小是 1-2 之间。
+
+> memcached -f 1.5 -vvv
+
+在 memcached 中，数据是不会消失的，memcached 不会自己释放已经分配的内存，而且不会监视该内存是否过期。
+
+当追加新记录却空间不足时，采用 Least Recently Used(LRU)机制来分配空间。
 
