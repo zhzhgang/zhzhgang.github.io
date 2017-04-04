@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Memcached学习之旅"
+title: "Memcached 学习之旅"
 date: 2017/4/3 17:47:35  
-description: "Memcached学习笔记"
+description: "Memcached 学习笔记"
 categories: [数据库]
 tags: [数据库, Memcached, 缓存]
 ---
