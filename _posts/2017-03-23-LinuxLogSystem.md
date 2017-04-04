@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Linux日志系统"
+title: "Linux 日志系统"
 date: 2017/3/23 22:55:59 
-description: "学习笔记：Linux日志系统"
+description: "学习笔记：Linux 日志系统"
 categories: [操作系统]
-tags: [操作系统, Linux日志]
+tags: [操作系统, Linux 日志]
 ---
 
 # Linux日志系统
