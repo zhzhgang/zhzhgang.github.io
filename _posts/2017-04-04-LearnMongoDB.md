@@ -220,3 +220,78 @@ OR 查询语句以 $or 作为关键词。
 		]
 	}).pretty()
 
+# <span id="3">文档（document）基本操作</span>
+
+## 创建集合
+
+语法：
+
+> db.createCollection(name, options)
+
+参数描述：
+ 
+* name: 创建的集合名称
+* options： 是一个初始化的文档（可选）
+
+
+示例：
+
+	db.createCollection("test", 
+		{ 
+			capped : 1, 
+			autoIndexID : 1, 
+			size : 6142800, 
+			max : 10000 
+		} 
+	)     
+
+参数描述：
+
+* capped: 类型为 Boolean，如果为 ture 则创建一个固定大小的集合，当其条目达到最大时可以自动覆盖以前的条目。在设置其为 ture 时也要指定参数大小。
+* autoIndexID: 类型为 Boolean，默认为 false，如果设置为 ture，则会在 _id field.s 上自动创建索引
+* size: 如果 capped 为 ture 需要指定，指定参数的最大值，单位为 byte。
+* max：指定最大的文档数。在 Mongodb 中也可以不用创建集合，因为在创建文档的时候也会自动的创建集合。
+
+
+## 删除集合
+
+语法：db.COLLECTION_NAME.drop()
+
+## 插入文档
+
+语法：db.COLLECTION_NAME.insert(document)
+
+## 更新文档
+
+语法：db.COLLECTION_NAME.update(SELECTION_CRITERIA,UPDATED_DATA)
+
+示例：
+
+	db.COLLECTION_NAME.update(
+		{"user_id":2,"e-mail":"test@qq.com"},
+		{$set:{"e-mail":"group@qq.com"}}
+	)
+
+* 将 user_id=2 的文档的 e-mail 改为 group@qq.com
+* 第一个大括号内容标示查找条件，第二个大括号内容则表示更新后的数据
+* 默认的 update 函数只对一个文档更新，如果想作用所有文档，则需要加入 multi:true
+
+## 替换已存在的文档
+
+语法：db.COLLECTION_NAME.save({_id:ObjectId(),NEW_DATA})
+
+## 删除文档
+
+语法：db.COLLECTION_NAME.remove(DELECTION_CRITERIA)
+
+remove 函数的参数跟 update 函数的第一个参数一样，相当于查找条件。
+
+## 总结
+
+* createCollection()：创建集合
+* db.COLLECTION.drop()：删除集合
+* db.COLLECTION_NAME.insert(document)：插入文档
+* db.COLLECTION_NAME.update(SELECTION_CRITERIA,UPDATED_DATA)：更新文档
+* db.COLLECTION_NAME.save({_id:ObjectId(),NEW_DATA})：替换已存在的文档
+* db.COLLECTION_NAME.remove(DELECTION_CRITERIA)：删除文档
+
