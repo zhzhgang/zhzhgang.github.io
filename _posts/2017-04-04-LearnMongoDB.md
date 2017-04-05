@@ -171,3 +171,52 @@ DBNAME 可用 db 或数据库名替代
 可以使用 use 创建和切换数据库，show dbs 可以查看有哪些数据库。dropDatabase 可以删除数据库。
 
 createCollection 可以创建集合，show collections 可以查看集合，insert() 和 save() 可以插入数据。
+
+
+# <span id="2">数据查询</span>
+
+## 查询语句
+
+### find() 语句
+
+find() 用法：db.COLLECTION_NAME.find()
+
+### pretty() 语句
+
+pretty() 可以使查询输出的结果更美观：
+
+> db.COLLECTION_NAME.find().pretty()
+
+## MongoDB 中的 AND
+
+当 find() 中传入多个键值对时，MongoDB 就会将其作为 AND 查询处理:
+
+> db.COLLECTION_NAME.find({ key1: value1, key2: value2 }).pretty()
+
+## MongoDB 中的 OR
+
+### OR
+
+OR 查询语句以 $or 作为关键词。
+
+	db.COLLECTION_NAME.find({
+		$or:[
+			{key1 : value1},
+			{key2 : value2}
+		]
+	}).pretty()
+
+
+## 同时使用 AND 和 OR
+
+使用范例：
+
+	db.COLLECTION_NAME.find({
+		key : value,
+	
+		$or:[
+			{key1 : value1},
+			{key2 : value2}
+		]
+	}).pretty()
+
