@@ -20,7 +20,11 @@ Spring 框架是一个分层架构，分为大约 20 个模块：
 
 模块总结：
 
-* Core Container
+* **Core Container**
+
+核心容器包含 Core、Beans、Context 和 Expression Language
+
+Core 和 Beans 模块是框架的基础部分，提供控制反转（IOC）和依赖注入（DI）特性。
 
 
 
