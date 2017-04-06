@@ -7,7 +7,20 @@ categories: [框架]
 tags: [Spring]
 ---
 
-# Spring 整体架构和环境搭建
+* [Spring 整体架构和环境搭建](#1)
+
+# <span id="1">Spring 整体架构和环境搭建</span>
 
 ## Spring 的整体架构
+
+Spring 框架是一个分层架构，分为大约 20 个模块：
+
+![](http://i.imgur.com/f63JVji.png)
+
+
+模块总结：
+
+* Core Container
+
+
 
