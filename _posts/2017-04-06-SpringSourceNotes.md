@@ -26,5 +26,27 @@ Spring 框架是一个分层架构，分为大约 20 个模块：
 
 Core 和 Beans 模块是框架的基础部分，提供控制反转（IOC）和依赖注入（DI）特性。
 
+* **Data Access/Integration**
+
+包含有 JDBC、ORM、OXM、JMS 和 Transaction 模块，其中：
+
+JDBC 模块提供了一个 JDBC 抽象层。
+
+ORM 模块为对象-关系映射 API，
+
+* **Web**
+
+
+
+* **AOP**
+
+
+* **Test**
+
+支持使用 Junit 和 TestNG 对 Spring 进行测试。
+
+ 
+## 环境搭建
+
 
 
