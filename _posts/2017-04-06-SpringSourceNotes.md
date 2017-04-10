@@ -108,13 +108,34 @@ Gradle 是一个基于 Groovy 的构建工具
 # <span id="2">二、容器的基本实现</span>
 
 
-## 容器基本用法
+## 2.1 容器基本用法
 
 
-## 功能分析
+## 2.2 功能分析
 
 
-## 工程搭建
+## 2.3 工程搭建
+
+在 Spring 中，用于实现容器功能的 org.springframework.beans.jar，看源码的时候需要打开这个工程。
+
+## 2.4 Spring 的结构组成
+
+### 2.4.1 beans 包的层级结构
+
+beans 包中的各个源码包的功能如下：
+
+* src/main/bean：用于展示 Spring 的主要逻辑
+* src/main/resources：用于存放系统的配置文件
+* src/test/java：用于对主要逻辑进行单元测试
+* src/test/resources：用于存放测试用的配置文件
+
+### 2.4.2 核心类介绍
+
+* **DefaultListableBeanFactory**
+
+XmlBeanFactory 继承自 DefaultListableBeanFactory，而DefaultListableBeanFactory 是整个 bean 加载的核心部分，是 Spring 注册及加载 bean 的默认实现。
+
+XmlBeanFactory 和 DefaultListableBeanFactory 的不同之处在于，XmlBeanFactory     中使用了自定义的 XML 读取器 XmlBeanDefinitionReader。DefaultListableBeanFactory 继承了 AbstractAutowireCapableBeanFactory 并实现了 ConfigurableListableBeanFactory 及 BeanDefinitionRegistry接口。
 
 
 
