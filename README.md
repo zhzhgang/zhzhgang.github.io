@@ -8,6 +8,6 @@ Java开发者 + 篮球爱好者
 
 # 联系我
 
-* GitHub：[zhzhgang](#https://github.com/zhzhgang)
+* GitHub：[zhzhgang](https://github.com/zhzhgang)
 * E-mail：zhang_zhonggang@163.com
 
