@@ -221,10 +221,6 @@ isr 是in-sync的集合。这是replicas列表当前还活着的子集。
 
 节点 1 是领导者，现在 kill 它。
 
-> netstat -ano | findstr 9092
-> 
-> taskkill /pid 17004 /f
-
 领导关系已经改为了从节点中的一个，节点 1 也不再 in-sync 复本集中。
 
 
