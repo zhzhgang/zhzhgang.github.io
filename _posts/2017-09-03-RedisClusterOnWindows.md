@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Windows 环境下搭建 Redis 集群"
-date: 9/3/2017 4:45:06 PM
+date: 2017/9/3 16:45:06
 description: "Windows 环境下搭建 Redis 集群"
 categories: [学习记录]
 tags: [Redis]
